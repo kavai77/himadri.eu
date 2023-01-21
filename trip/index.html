@@ -12,17 +12,19 @@
 </head>
 <body>
 <div class="container" style="max-width: 400px">
+    <h1 style="text-align: center">Seminyak, Bali</h1>
     <div style="text-align: center">I am a
         <span class="dropdown">
-      <button class="btn btn-primary dropdown-toggle genderClass" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-      </button>
-      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-        <li><a class="dropdown-item" href="#" id="boyLi">Boy</a></li>
-        <li><a class="dropdown-item" href="#" id="girlLi">Girl</a></li>
-      </ul>
-    </span>
+          <button class="btn btn-primary dropdown-toggle genderClass" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            <li><a class="dropdown-item" href="#" id="boyLi">Boy</a></li>
+            <li><a class="dropdown-item" href="#" id="girlLi">Girl</a></li>
+          </ul>
+        </span>&nbsp;
+        <span id="nowAvailable"></span>
     </div>
-    <div id="nowAvailable" style="text-align: center"></div>
+    <div id="nowAvailable1" style="text-align: center"></div>
     <div id="today">
         <h2 style="text-align: center"><span class="genderClass"></span>s' hours for today</h2>
         <table class="table">
@@ -113,9 +115,11 @@
         const genderSchedule = schedule.get(gender);
         const todayRows = [];
         const tomorrowRows = [];
+        let nowSomethingAvailable = false;
         genderSchedule.forEach(obj => {
             if (obj.dayParity === todayParity && obj.fromHour <= hour && hour < obj.toHour) {
                 $("#nowAvailable").html("Now available: <span style='font-size: xx-large; font-weight: bolder'>" + obj.type + "</span>");
+                nowSomethingAvailable = true;
             }
             if (obj.dayParity === todayParity && hour < obj.toHour) {
                 todayRows.push(obj);
@@ -124,11 +128,18 @@
                 tomorrowRows.push(obj);
             }
         });
-        if (todayRows.length === 0) {
-            $("#today").hide();
-        }
+        setVisible("#today", todayRows.length !== 0);
+        setVisible("#nowAvailable", nowSomethingAvailable);
         renderRows(todayRows, "#todayScheduleTableBody")
         renderRows(tomorrowRows, "#tomorrowScheduleTableBody")
+    }
+    
+    function setVisible(jquerySelector, visible) {
+        if (visible) {
+            $(jquerySelector).show();
+        } else {
+            $(jquerySelector).hide();
+        }
     }
 
     function renderRows(rows, tableBodyId) {
