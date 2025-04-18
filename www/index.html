@@ -34,7 +34,8 @@
         <div class="row">
           <div class="col-sm-8 col-md-7 py-4">
             <h4 class="text-white">About</h4>
-            <p class="text-muted">I am a seasoned Java and Kotlin software engineer with extensive knowledge about distributed and highly scalability systems.</p>
+            <p class="text-muted">I am a seasoned Java software engineer with extensive knowledge about distributed and highly scalable systems.<p>
+            <p class="text-muted">  I am also a free-time Machine Learning practitioner (Neural Networks, Convolutional Networks, Transformers, RNN, Reinforcement Learning).</p>
           </div>
           <div class="col-sm-4 offset-md-1 py-4">
             <h4 class="text-white">Contact</h4>
@@ -50,7 +51,7 @@
     <div class="navbar navbar-dark bg-dark shadow-sm">
       <div class="container d-flex justify-content-between">
         <a href="#" class="navbar-brand d-flex align-items-center">
-          <h4 class="text-white">Csaba Kavai</h4>
+          <h3 class="text-white">Csaba Kávai</h3>
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -175,16 +176,47 @@
 
   </main>
 
-  <footer class="text-muted">
-    <div class="container">
-      <p class="float-right">
-        <a href="#">Back to top</a>
-      </p>
+  <!-- Cookie Consent Modal -->
+  <div class="modal fade" id="cookieModal" tabindex="-1" aria-labelledby="cookieModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="cookieModalLabel">We Value Your Privacy</h5>
+        </div>
+        <div class="modal-body">
+          <p>
+            This website uses cookies to enhance the user experience, analyze site usage.
+            Please accept or customize your preferences. Read our <a href="privacy-policy.html" target="_blank">Privacy Policy</a>.
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="rejectCookies">Reject</button>
+          <button type="button" class="btn btn-primary" id="acceptCookies">Accept</button>
+        </div>
+      </div>
     </div>
-  </footer>
+  </div>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+  <script>
+    $(document).ready(function () {
+      if (!localStorage.getItem("cookiesAccepted")) {
+        const cookieModal = new bootstrap.Modal($('#cookieModal')[0]);
+        cookieModal.show();
+
+        $('#acceptCookies').on('click', function () {
+          localStorage.setItem("cookiesAccepted", "true");
+          cookieModal.hide();
+        });
+
+        $('#rejectCookies').on('click', function () {
+          localStorage.setItem("cookiesAccepted", "false");
+          cookieModal.hide();
+        });
+      }
+    });
+  </script>
   </body>
 </html>
